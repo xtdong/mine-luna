@@ -14,6 +14,33 @@ class ProductListing extends Component {
     }
 
     loadData = async () => {
+
+        let config1 = {
+            baseURL: 'https://jsonplaceholder.typicode.com/',
+            url: '/todos/1',
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'pearl-session-id': 'b342663c-ea57-4eb8-8ee4-a7a9c603dc57',
+                // 'Access-Control-Allow-Origin': '*',
+            },
+            params: {},
+            data: {},
+            auth: {},
+        };
+
+        axios(config1)
+            .then(response => {
+                console.log(response);
+            })
+            .catch((err) => {
+                let msg = "Can't connect to product server"
+                // alert(msg);
+                // this.productSelectHandler();
+                console.log(err);
+            });
+
+
         let config = {
             url: '/getProducts',
             method: 'post',
