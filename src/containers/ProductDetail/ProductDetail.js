@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-
 import axios from '../../axios';
 
 import Spinner from '../../components/UI/Spinner/Spinner';
+/*
+ Show the product information.(eg: product name, description, photo and dimensions)
 
+ Input: Product ID (String)
+ Output: Product details information
+ */
 class productDetail extends Component {
     state = {
         selectProduct: null
@@ -23,9 +27,7 @@ class productDetail extends Component {
                 })
                 .catch((err) => {
                     let msg = "Can't connect to product detail"
-                    // alert(msg);
-                    // this.backListingHandler();
-                    console.log(err);
+                    console.log(msg.concat(err));
                 });
         }
     }
@@ -36,14 +38,15 @@ class productDetail extends Component {
 
     render() {
         let product = null;
+
         if (this.props.match.params.id) {
             product = <Spinner />;
         }
         if (this.state.selectProduct) {
 
-            let dimensions = this.state.selectProduct.dimensions
-            const dimension = Object.keys(dimensions).map(key =>
-                <li><span className='text-capitalize'>{key}</span> : {dimensions[key]}</li>
+            let dimensionsData = this.state.selectProduct.dimensions
+            let dimension = Object.keys(dimensionsData).map(key =>
+                <li><span className='text-capitalize'>{key}</span> : {dimensionsData[key]}</li>
             )
 
             product = (
@@ -65,7 +68,7 @@ class productDetail extends Component {
             );
         }
         return (
-            <div>
+            <div className="container">
                 {product}
             </div>
         )

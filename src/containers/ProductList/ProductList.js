@@ -3,7 +3,15 @@ import axios from '../../axios';
 
 import ProductListItem from '../../components/ProductListItem/ProductListItem';
 import Spinner from '../../components/UI/Spinner/Spinner';
+/*
+List down 10 products with product name and photos
 
+Data source: API call '/getProducts'
+
+ Test: ProductList.test.js
+ 1. The Spinner is exist before Fetch.
+ 2. Show <ProductListItem /> when the Fetch success.
+*/
 class ProductListing extends Component {
     state = {
         productList: []
@@ -14,33 +22,6 @@ class ProductListing extends Component {
     }
 
     loadData = async () => {
-
-        let config1 = {
-            baseURL: 'https://jsonplaceholder.typicode.com/',
-            url: '/todos/1',
-            method: 'get',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'pearl-session-id': 'b342663c-ea57-4eb8-8ee4-a7a9c603dc57',
-                // 'Access-Control-Allow-Origin': '*',
-            },
-            params: {},
-            data: {},
-            auth: {},
-        };
-
-        axios(config1)
-            .then(response => {
-                console.log(response);
-            })
-            .catch((err) => {
-                let msg = "Can't connect to product server"
-                // alert(msg);
-                // this.productSelectHandler();
-                console.log(err);
-            });
-
-
         let config = {
             url: '/getProducts',
             method: 'post',
@@ -51,30 +32,20 @@ class ProductListing extends Component {
             },
             params: {},
             data: {},
-            auth: {},
         };
 
         axios(config)
             .then(response => {
-                const ProductList = response.data.products.slice(0, 10);
-
-                const updatedProductList = ProductList.map(product => {
-                    return {
-                        ...product,
-                    }
-                });
-                this.setState({ productList: updatedProductList });
+                const newProductList = response.data.products.slice(0, 10);
+                this.setState({ productList: newProductList });
             })
             .catch((err) => {
                 let msg = "Can't connect to product server"
-                // alert(msg);
-                // this.productSelectHandler();
-                console.log(err);
+                console.log(msg.concat(err));
             });
     }
 
     productSelectHandler = (productId) => {
-        console.log("hello", productId)
         this.props.history.push('/detail/' + productId);
     }
 

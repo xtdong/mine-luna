@@ -3,10 +3,14 @@ import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import mockAxios from 'jest-mock-axios';
 
-import ProductListing from '../ProductListing/ProductListing';
+import ProductList from './ProductList';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import ProductListItem from '../../components/ProductListItem/ProductListItem';
-
+/*
+Test Source file: ProductList.js
+ 1. The Spinner is exist before Fetch.
+ 2. Show <ProductDetailItem /> when the Fetch success.
+ */
 configure({ adapter: new Adapter });
 
 beforeAll(() => {
@@ -16,7 +20,7 @@ beforeAll(() => {
 
 let wrapper;
 beforeEach(() => {
-    wrapper = shallow(<ProductListing />, { disableLifecycleMethods: true });
+    wrapper = shallow(<ProductList />, { disableLifecycleMethods: true });
 });
 afterEach(() => {
     wrapper.unmount();
@@ -30,7 +34,7 @@ it("must render a loading span before api call success", () => {
 it("must show the ProductListItem and hide the loading span after api call success",
     (done) => {
         // here we are spying on componentDidMount to know that it has been called
-        const spyDidMount = jest.spyOn(ProductListing.prototype, "componentDidMount");
+        const spyDidMount = jest.spyOn(ProductList.prototype, "componentDidMount");
 
         const didMount = wrapper.instance().componentDidMount();
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import ProductListing from './ProductListing/ProductListing';
+import ProductList from './ProductList/ProductList';
 import ProductDetail from './ProductDetail/ProductDetail';
 
 class Layout extends Component {
@@ -13,8 +13,8 @@ class Layout extends Component {
                 </header>
                 <div className='mt-5'>
                     <Switch>
-                        <Route path='/' exact component={ProductListing} />
-                        <Route path={'/detail/:id'} component={ProductDetail} />
+                        <Route path='/' exact component={ProductList} />
+                        <Route path={'/detail/:id'} onUpdate={() => window.scrollTo(0, 0)} component={ProductDetail} />
                         <Redirect to='/' />
                     </Switch>
                 </div>

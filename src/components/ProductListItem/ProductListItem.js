@@ -1,7 +1,7 @@
 import React from 'react';
 import './ProductListItem.css';
 
-const ProductListItem = (props) => {
+const productListItem = (props) => {
     return (
         <div className='card card-hover' onClick={props.click}>
             <img className='card-img-top' src={props.url} alt='' />
@@ -15,4 +15,4 @@ const ProductListItem = (props) => {
         </div>
     )
 }
-export default ProductListItem;
+export default productListItem;
